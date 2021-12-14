@@ -112,15 +112,14 @@ class ViewController: UIViewController {
             return
         }
         
-        UIView.animate(withDuration: 1) {
-            self.view.layoutIfNeeded()
-        }
         
-        ballLayerX.constant = 0.0
-        ballLayerY.constant = 200.0
-        UIView.animate(withDuration: 1) {
+        UIView.animate(withDuration: 0.1, animations: {
             self.view.layoutIfNeeded()
-        }
+        }, completion: {_ in
+            self.ballLayerX.constant = 0.0
+            self.ballLayerY.constant = 200.0
+        })
+        
     }
     
     func setColor() {
