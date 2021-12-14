@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -22,11 +23,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var ballLayerX: NSLayoutConstraint!
     @IBOutlet weak var ballLayerY: NSLayoutConstraint!
     @IBOutlet weak var progressBar: UIProgressView!
+    @IBOutlet weak var TimeLabel: UILabel!
+    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var score: UILabel!
     
+    
+    var player: AVAudioPlayer?
+    
+    var initialFrame: CGPoint = CGPoint(x: 0, y: 0)
+    var currentBalls: [UIView] = []
     var timer = Timer()
     var totalTime = 0
     var secondsPassed = 0
     var swipeLog = 0
+    var count = 0
+    var sum: Int = 0
     
     enum BallColor: Int {
         case red = 0
@@ -38,6 +49,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setView()
         setSwipe()
+        initialFrame = centerBallView.frame.origin
+        print(initialFrame)
+        print(ballLayerX.constant)
+        print(ballLayerY.constant)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,21 +95,30 @@ class ViewController: UIViewController {
         switch swipe.direction {
         case UISwipeGestureRecognizer.Direction.left:
             ballLayerX.constant = ballLayerX.constant - 200
-            print("left")
+            print("변한 값 X: \(ballLayerX.constant)")
+            getSwipeGesture(location: ballLayerX.constant, xy: 0)
             swipeLog = 0
         case UISwipeGestureRecognizer.Direction.right:
             ballLayerX.constant = ballLayerX.constant + 200
-            print("right")
+            print("변한 값 X: \(ballLayerX.constant)")
+            getSwipeGesture(location: ballLayerX.constant, xy: 0)
             swipeLog = 1
         case UISwipeGestureRecognizer.Direction.down:
             ballLayerY.constant = ballLayerY.constant + 200
-            print("down")
+            print("변한 값 Y: \(ballLayerY.constant)")
+            getSwipeGesture(location: ballLayerY.constant, xy: 1)
             swipeLog = 2
         default:
             return
         }
         
-        UIView.animate(withDuration: 0.1) {
+        UIView.animate(withDuration: 1) {
+            self.view.layoutIfNeeded()
+        }
+        
+        ballLayerX.constant = 0.0
+        ballLayerY.constant = 200.0
+        UIView.animate(withDuration: 1) {
             self.view.layoutIfNeeded()
         }
     }
@@ -114,6 +138,7 @@ class ViewController: UIViewController {
                 return
             }
         }
+        currentBalls = balls
     }
     
     @objc func updateTimer() {
@@ -137,6 +162,52 @@ class ViewController: UIViewController {
         setColor()
         progressBar.progress = 0.0
         setTimer()
+    }
+    
+    func getSwipeGesture(location: CGFloat, xy: Int) {
+        let balls : [UIView] = [ball1, ball2, ball3, ball4, ball5, ball6, ball7, ball8]
+        if xy == 0, location > 150 {
+            print("blue")
+            if balls[count].backgroundColor  == . blue {
+                print("파랑 맞음")
+                balls[count].backgroundColor = .black
+                count += 1
+                sum += 1
+            } else {
+                print("파랑 아님")
+            }
+        } else if xy == 0, location < -150 {
+            print("red")
+            if balls[count].backgroundColor  == . red {
+                print("빨강 맞음")
+                sum += 1
+                balls[count].backgroundColor = .black
+                count += 1
+            } else {
+                print("빨강 아님")
+            }
+        } else if xy == 1, location > 300 {
+            print("yellow")
+            if balls[count].backgroundColor  == . yellow {
+                print("노랑 맞음")
+                sum += 1
+                balls[count].backgroundColor = .black
+                count += 1
+            } else {
+                print("노랑 아님")
+            }
+        }
+        
+        if count == balls.count {
+            setColor()
+            count = 0
+        }
+        print(sum)
+        score.text = "맞춘 개수 : \(sum)"
+    }
+    
+    func playSound() {
+        
     }
 }
 
