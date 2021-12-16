@@ -13,6 +13,8 @@
 		4B513852276714C700A83C53 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B513850276714C700A83C53 /* Main.storyboard */; };
 		4B513854276714C900A83C53 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B513853276714C900A83C53 /* Assets.xcassets */; };
 		4B513857276714C900A83C53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B513855276714C900A83C53 /* LaunchScreen.storyboard */; };
+		4BA0B87C2769BF46002FC42E /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0B87B2769BF46002FC42E /* ScoreViewController.swift */; };
+		4BA0B87E2769CBAC002FC42E /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA0B87D2769CBAC002FC42E /* InitialViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		4B513853276714C900A83C53 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4B513856276714C900A83C53 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4B513858276714C900A83C53 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4BA0B87B2769BF46002FC42E /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		4BA0B87D2769CBAC002FC42E /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				4B513853276714C900A83C53 /* Assets.xcassets */,
 				4B513855276714C900A83C53 /* LaunchScreen.storyboard */,
 				4B513858276714C900A83C53 /* Info.plist */,
+				4BA0B87B2769BF46002FC42E /* ScoreViewController.swift */,
+				4BA0B87D2769CBAC002FC42E /* InitialViewController.swift */,
 			);
 			path = ThreadExerciseApp;
 			sourceTree = "<group>";
@@ -138,9 +144,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BA0B87E2769CBAC002FC42E /* InitialViewController.swift in Sources */,
 				4B51384F276714C700A83C53 /* ViewController.swift in Sources */,
 				4B51384B276714C700A83C53 /* AppDelegate.swift in Sources */,
 				4B51384D276714C700A83C53 /* SceneDelegate.swift in Sources */,
+				4BA0B87C2769BF46002FC42E /* ScoreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -49,10 +49,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setView()
         setSwipe()
-        initialFrame = centerBallView.frame.origin
-        print(initialFrame)
-        print(ballLayerX.constant)
-        print(ballLayerY.constant)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,17 +91,14 @@ class ViewController: UIViewController {
         switch swipe.direction {
         case UISwipeGestureRecognizer.Direction.left:
             ballLayerX.constant = ballLayerX.constant - 200
-            print("변한 값 X: \(ballLayerX.constant)")
             getSwipeGesture(location: ballLayerX.constant, xy: 0)
             swipeLog = 0
         case UISwipeGestureRecognizer.Direction.right:
             ballLayerX.constant = ballLayerX.constant + 200
-            print("변한 값 X: \(ballLayerX.constant)")
             getSwipeGesture(location: ballLayerX.constant, xy: 0)
             swipeLog = 1
         case UISwipeGestureRecognizer.Direction.down:
             ballLayerY.constant = ballLayerY.constant + 200
-            print("변한 값 Y: \(ballLayerY.constant)")
             getSwipeGesture(location: ballLayerY.constant, xy: 1)
             swipeLog = 2
         default:
@@ -119,7 +112,6 @@ class ViewController: UIViewController {
             self.ballLayerX.constant = 0.0
             self.ballLayerY.constant = 200.0
         })
-        
     }
     
     func setColor() {
@@ -143,10 +135,16 @@ class ViewController: UIViewController {
     @objc func updateTimer() {
         if secondsPassed < totalTime {
             secondsPassed += 1
+            let minute: Int = 60
+            TimeLabel.text = "\(minute - secondsPassed)"
             progressBar.progress = Float(secondsPassed) / Float(totalTime)
         } else {
             timer.invalidate()
-            print("end")
+            guard let vc = storyboard?.instantiateViewController(withIdentifier: "ScoreViewController") as? ScoreViewController else {
+                return
+            }
+            vc.score = sum
+            present(vc, animated: true, completion: nil)
         }
     }
     
@@ -161,39 +159,28 @@ class ViewController: UIViewController {
         setColor()
         progressBar.progress = 0.0
         setTimer()
+        centerBallView.backgroundColor = ball1.backgroundColor
     }
     
     func getSwipeGesture(location: CGFloat, xy: Int) {
         let balls : [UIView] = [ball1, ball2, ball3, ball4, ball5, ball6, ball7, ball8]
         if xy == 0, location > 150 {
-            print("blue")
             if balls[count].backgroundColor  == . blue {
-                print("파랑 맞음")
                 balls[count].backgroundColor = .black
                 count += 1
                 sum += 1
-            } else {
-                print("파랑 아님")
             }
         } else if xy == 0, location < -150 {
-            print("red")
             if balls[count].backgroundColor  == . red {
-                print("빨강 맞음")
-                sum += 1
                 balls[count].backgroundColor = .black
                 count += 1
-            } else {
-                print("빨강 아님")
+                sum += 1
             }
         } else if xy == 1, location > 300 {
-            print("yellow")
             if balls[count].backgroundColor  == . yellow {
-                print("노랑 맞음")
-                sum += 1
                 balls[count].backgroundColor = .black
                 count += 1
-            } else {
-                print("노랑 아님")
+                sum += 1
             }
         }
         
@@ -201,7 +188,7 @@ class ViewController: UIViewController {
             setColor()
             count = 0
         }
-        print(sum)
+        centerBallView.backgroundColor = balls[count].backgroundColor
         score.text = "맞춘 개수 : \(sum)"
     }
     
