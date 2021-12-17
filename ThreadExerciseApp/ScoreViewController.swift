@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ScoreViewController: UIViewController {
     
+    var realm: Realm!
     @IBOutlet weak var scoreLabel: UILabel!
     
     var score: Int = 0
@@ -16,6 +18,12 @@ class ScoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scoreLabel.text = "\(score)"
+        
+        realm = try! Realm()
+        var rank = Score.init(score: score)
+        try! realm.write{
+            realm.add(rank)
+        }
     }
     
     @IBAction func restart(_ sender: UIButton) {
@@ -23,4 +31,8 @@ class ScoreViewController: UIViewController {
         present(vc, animated: true, completion: nil)
     }
     
+    @IBAction func homeButton(_ sender: UIButton) {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "InitialViewController") as? InitialViewController else { return }
+        present(vc, animated: true, completion: nil)
+    }
 }

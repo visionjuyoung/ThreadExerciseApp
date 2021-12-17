@@ -54,6 +54,9 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         gameStart()
+        DispatchQueue.global().async {
+            self.playSound()
+        }
     }
     
     func setView() {
@@ -143,6 +146,7 @@ class ViewController: UIViewController {
             guard let vc = storyboard?.instantiateViewController(withIdentifier: "ScoreViewController") as? ScoreViewController else {
                 return
             }
+            player?.pause()
             vc.score = sum
             present(vc, animated: true, completion: nil)
         }
@@ -193,7 +197,17 @@ class ViewController: UIViewController {
     }
     
     func playSound() {
-        
+        let url = Bundle.main.url(forResource: "bgm", withExtension: "mp3")
+        if let url = url {
+            do {
+                player = try AVAudioPlayer(contentsOf: url)
+                guard let sound = player else { return }
+                sound.prepareToPlay()
+                sound.play()
+            } catch let error {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 

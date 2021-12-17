@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q0x-iD-MC6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q0x-iD-MC6">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,7 +12,7 @@
         <!--Initial View Controller-->
         <scene sceneID="BRd-PP-8iz">
             <objects>
-                <viewController storyboardIdentifier="InitialViewController" id="q0x-iD-MC6" customClass="InitialViewController" customModule="ThreadExerciseApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialViewController" modalPresentationStyle="fullScreen" id="q0x-iD-MC6" customClass="InitialViewController" customModule="ThreadExerciseApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t8x-Uy-mSU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -60,12 +60,18 @@
                                         <color key="tintColor" red="0.38909703490000003" green="0.74833649400000002" blue="0.77647930379999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="게임시작"/>
+                                        <connections>
+                                            <action selector="startButton:" destination="q0x-iD-MC6" eventType="touchUpInside" id="v7a-wz-BsZ"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVx-LV-KHL">
                                         <rect key="frame" x="178.5" y="0.0" width="135.5" height="50"/>
                                         <color key="tintColor" red="0.38909703490000003" green="0.74833649400000002" blue="0.77647930379999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="점수 화면"/>
+                                        <connections>
+                                            <action selector="rankButton:" destination="q0x-iD-MC6" eventType="touchUpInside" id="L0v-7m-twQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -305,6 +311,57 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="103.79464285714285"/>
         </scene>
+        <!--Rank View Controller-->
+        <scene sceneID="VTZ-kW-anY">
+            <objects>
+                <viewController storyboardIdentifier="RankViewController" modalPresentationStyle="fullScreen" id="BMU-U5-5GG" customClass="RankViewController" customModule="ThreadExerciseApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a15-1N-1J1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fJb-A0-XzP">
+                                <rect key="frame" x="16" y="60" width="60.5" height="31"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="home"/>
+                                <connections>
+                                    <action selector="homeButton:" destination="BMU-U5-5GG" eventType="touchUpInside" id="qXE-Vz-Hld"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="SGn-Zh-oLQ">
+                                <rect key="frame" x="0.0" y="91" width="414" height="771"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="FiP-p3-Hnq">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FiP-p3-Hnq" id="X5d-BP-O4x">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="eeR-02-DU9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SGn-Zh-oLQ" firstAttribute="top" secondItem="fJb-A0-XzP" secondAttribute="bottom" id="6Hb-wF-hIR"/>
+                            <constraint firstItem="SGn-Zh-oLQ" firstAttribute="leading" secondItem="eeR-02-DU9" secondAttribute="leading" id="Aew-nw-HuR"/>
+                            <constraint firstItem="fJb-A0-XzP" firstAttribute="leading" secondItem="eeR-02-DU9" secondAttribute="leading" constant="16" id="Bbn-9q-JoV"/>
+                            <constraint firstItem="fJb-A0-XzP" firstAttribute="top" secondItem="eeR-02-DU9" secondAttribute="top" constant="16" id="G1F-DO-bHS"/>
+                            <constraint firstItem="SGn-Zh-oLQ" firstAttribute="bottom" secondItem="eeR-02-DU9" secondAttribute="bottom" id="KwR-gr-Mlq"/>
+                            <constraint firstItem="SGn-Zh-oLQ" firstAttribute="trailing" secondItem="eeR-02-DU9" secondAttribute="trailing" id="k0o-dZ-BAp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="SGn-Zh-oLQ" id="nvd-wH-2HE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mRI-pc-rve" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-159.42028985507247" y="741.96428571428567"/>
+        </scene>
         <!--Score View Controller-->
         <scene sceneID="iIl-av-aww">
             <objects>
@@ -339,6 +396,7 @@
                                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="81"/>
                                                 </buttonConfiguration>
                                                 <connections>
+                                                    <action selector="homeButton:" destination="FAW-0O-QJr" eventType="touchUpInside" id="W35-CP-D75"/>
                                                     <action selector="restart:" destination="FAW-0O-QJr" eventType="touchUpInside" id="edW-5u-NCZ"/>
                                                 </connections>
                                             </button>

@@ -26,4 +26,14 @@ class InitialViewController: UIViewController {
             ball.layer.cornerRadius = 40
         }
     }
+    
+    @IBAction func startButton(_ sender: UIButton) {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "ViewController") as? ViewController else { return }
+        present(vc, animated: true, completion: nil)
+    }
+    
+    @IBAction func rankButton(_ sender: UIButton) {
+        guard let vc = self.storyboard?.instantiateViewController(withIdentifier: "RankViewController") as? RankViewController else { return }
+        present(vc, animated: true, completion: nil)
+    }
 }
